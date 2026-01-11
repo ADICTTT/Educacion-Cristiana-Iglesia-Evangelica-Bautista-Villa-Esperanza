@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe de Clase</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="card">
+        <h2>Informe de Clase</h2>
+        <form id="formInforme">
+            <label>Domingo:
+                <input type="date" id="domingo" required>
+            </label>
+            <label>Clase:
+                <input type="text" id="clase" placeholder="Ej. Adolescentes" required>
+            </label>
+            <label>Asistencia:
+                <input type="number" id="asistencia" min="0" required>
+            </label>
+            <label>Biblias:
+                <input type="number" id="biblias" min="0" required>
+            </label>
+            <label>Ofrendas:
+                <input type="number" id="ofrendas" min="0" required>
+            </label>
+            <label>Visitas:
+                <input type="number" id="visitas" min="0" required>
+            </label>
+            <label>Cumpleaños:
+                <input type="number" id="cumpleanos" min="0" required>
+            </label>
+            <label>Maestr@:
+                <input type="text" id="maestro">
+            </label>
+            <button type="submit">Registrar</button>
+        </form>
+        <div class="lista-informes">
+            <h3>Informes Registrados</h3>
+            <ul id="listaInformes"></ul>
+        </div>
+    </div>
+
+    <div class="resultado" style="display:none;">
+        <h3>Registro guardado</h3>
+        <pre id="salida"></pre>
+        <button id="btnPdfRegistro" style="display:none;">Generar PDF del registro</button>
+    </div>
+
+    <div class="reportes">
+        <h3>Reportes</h3>
+        <label>Fecha del reporte:
+            <input type="date" id="fechaReporte">
+        </label>
+        <div class="botones-reporte">
+            <button onclick="reporteDiario()">Ver Reporte Diario</button>
+            <button onclick="pdfDiario()">Descargar PDF Diario</button>
+            <button onclick="reporteMensual()">Ver Reporte Mensual</button>
+            <button onclick="pdfMensual()">Descargar PDF Mensual</button>
+            <button onclick="reporteAnual()">Ver Reporte Anual</button>
+            <button onclick="pdfAnual()">Descargar PDF Anual</button>
+        </div>
+        <pre id="reporteSalida"></pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

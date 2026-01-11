@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f5f6fa;
+    padding: 20px;
+    color: #2c3e50;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    background-color: #fff8dc; /* beige claro */
+    border: 1.8px solid #d6c77a;
+    width: 360px;
+    padding: 25px 30px;
+    margin-top: 30px;
+    box-shadow: 0 8px 22px rgba(102, 102, 102, 0.12);
+    border-radius: 14px;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 12px 30px rgba(102, 102, 102, 0.25);
+}
+
+h2 {
+    background-color: #d4b54f;
+    text-align: center;
+    padding: 14px 0;
+    margin-top: 0;
+    font-weight: 600;
+    color: #2c3e50;
+    border-radius: 10px 10px 0 0;
+    letter-spacing: 1.1px;
+    user-select: none;
+    font-size: 1.8rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4a4a4a;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.8px solid #ccc;
+    border-radius: 10px;
+    background-color: #fffdf3;
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease, box-shadow 0.25s ease;
+    outline-offset: 2px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #d4b54f;
+    box-shadow: 0 0 10px #d4b54faa;
+}
+
+button {
+    width: 100%;
+    padding: 14px 0;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #4a90e2, #357ABD);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(53, 122, 189, 0.5);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #357ABD, #4a90e2);
+    box-shadow: 0 8px 20px rgba(53, 122, 189, 0.75);
+}
+
+.resultado,
+.reportes {
+    background: #ffffff;
+    border-radius: 14px;
+    width: 360px;
+    margin: 30px auto 0;
+    padding: 20px 25px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+    font-size: 1rem;
+    color: #444;
+    box-sizing: border-box;
+}
+
+.reportes h3,
+.resultado h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+pre {
+    background-color: #f1f1f1;
+    padding: 12px 15px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.botones-reporte {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-top: 15px;
+}
+
+.lista-informes ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.lista-informes li {
+    background: #fffdf3;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #d6c77a;
+    box-shadow: 0 2px 5px rgba(102, 102, 102, 0.1);
+}
+
+.lista-informes button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #d4b54f;
+    color: #2c3e50;
+    transition: background-color 0.3s ease;
+}
+
+.lista-informes button:hover {
+    background-color: #b59437;
+}
+
+
+label[for="anioReporteMensual"],
+label[for="mesReporteMensual"],
+label[for="anioReporteAnual"] {
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 20px;
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.8px solid #ccc;
+    border-radius: 10px;
+    background-color: #fffdf3;
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease, box-shadow 0.25s ease;
+    outline-offset: 2px;
+    box-sizing: border-box;
+    margin-top: 6px;
+}
+
+select:focus {
+    border-color: #d4b54f;
+    box-shadow: 0 0 10px #d4b54faa;
+}
+
+/* ====== MODO CELULAR ====== */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .card,
+    .resultado,
+    .reportes {
+        width: 100%;
+        max-width: 100%;
+        margin: 15px auto;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    form label,
+    label[for="anioReporteMensual"],
+    label[for="mesReporteMensual"],
+    label[for="anioReporteAnual"] {
+        font-size: 16px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    pre {
+        font-size: 14px;
+    }
+}
