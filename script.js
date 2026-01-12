@@ -8,29 +8,30 @@ let editIndex = -1;  // Índice del informe en edición (-1 si ninguno)
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
+    const fecha = document.getElementById("domingo").value;
     const asistencia = parseInt(document.getElementById("asistencia").value);
-    const biblias = parseInt(document.getElementById("biblias").value) || 0;
-    const ofrendas = parseInt(document.getElementById("ofrendas").value) || 0;
-    const visitas = parseInt(document.getElementById("visitas").value) || 0;
-    const cumpleanos = parseInt(document.getElementById("cumpleanos").value) || 0;
 
-    if (asistencia < 0 || biblias < 0 || ofrendas < 0 || visitas < 0 || cumpleanos < 0) {
-        alert("Los valores numéricos no pueden ser negativos");
+    if (asistencia < 0) {
+        alert("La asistencia no puede ser negativa");
         return;
     }
-    if (!document.getElementById("domingo").value || !document.getElementById("clase").value) {
-        alert("Fecha y clase son obligatorios");
+
+    const indexExistente = existeRegistroPorFecha(fecha);
+
+    if (editIndex === -1 && indexExistente !== -1) {
+        alert("⚠️ Ya existe un registro para esta fecha.\nPuedes editar el registro existente.");
+        editarInforme(indexExistente);
         return;
     }
 
     const informe = {
-        domingo: document.getElementById("domingo").value,
+        domingo: fecha,
         clase: document.getElementById("clase").value,
         asistencia: asistencia,
-        biblias: biblias,
-        ofrendas: ofrendas,
-        visitas: visitas,
-        cumpleanos: cumpleanos,
+        biblias: parseInt(document.getElementById("biblias").value) || 0,
+        ofrendas: parseInt(document.getElementById("ofrendas").value) || 0,
+        visitas: parseInt(document.getElementById("visitas").value) || 0,
+        cumpleanos: parseInt(document.getElementById("cumpleanos").value) || 0,
         maestro: document.getElementById("maestro").value
     };
 
@@ -49,30 +50,47 @@ form.addEventListener("submit", function(e) {
     mostrarInformes();
 });
 
+
 // Mostrar informes con botones editar/eliminar
 function mostrarInformes() {
     listaInformes.innerHTML = "";
 
-    if (informes.length === 0) {
-        listaInformes.innerHTML = "<li>No hay informes registrados</li>";
+    const hoy = new Date();
+    const mesActual = hoy.getMonth();
+    const anioActual = hoy.getFullYear();
+
+    const delMes = informes.filter(i => {
+        const fecha = new Date(i.domingo);
+        return (
+            fecha.getMonth() === mesActual &&
+            fecha.getFullYear() === anioActual
+        );
+    });
+
+    if (delMes.length === 0) {
+        listaInformes.innerHTML = "<li>No hay informes este mes</li>";
         return;
     }
 
-    informes.forEach((inf, index) => {
+    delMes.forEach(inf => {
+        const indexReal = informes.indexOf(inf);
+
         const li = document.createElement("li");
         li.style.marginBottom = "10px";
 
         li.innerHTML = `
-            <strong>${inf.domingo} - ${inf.clase}</strong> (Maestr@: ${inf.maestro}) <br>
+            <strong>${inf.domingo} - ${inf.clase}</strong> (Maestr@: ${inf.maestro})<br>
             Asistencia: ${inf.asistencia}, Ofrendas: ${inf.ofrendas}, Visitas: ${inf.visitas}
             <br>
-            <button onclick="editarInforme(${index})">Editar</button>
-            <button onclick="eliminarInforme(${index})">Eliminar</button>
+            <button onclick="editarInforme(${indexReal})">Editar</button>
+            <button onclick="eliminarInforme(${indexReal})">Eliminar</button>
         `;
 
         listaInformes.appendChild(li);
     });
 }
+
+
 
 // Cargar informe para editar
 function editarInforme(index) {
@@ -392,6 +410,53 @@ function pdfAnual() {
 
     doc.save(`reporte_anual_${anio}.pdf`);
 }
+
+function filtrarPorMes() {
+    const mes = document.getElementById("mesFiltro").value;
+    const anio = document.getElementById("anioFiltro").value;
+
+    listaInformes.innerHTML = "";
+
+    if (mes === "" || anio === "") {
+        alert("Seleccione mes y año");
+        return;
+    }
+
+    const filtrados = informes.filter(i => {
+        const fecha = new Date(i.domingo);
+        return (
+            fecha.getMonth() === parseInt(mes) &&
+            fecha.getFullYear() === parseInt(anio)
+        );
+    });
+
+    if (filtrados.length === 0) {
+        listaInformes.innerHTML = "<li>No hay informes para ese mes</li>";
+        return;
+    }
+
+    filtrados.forEach(inf => {
+        const indexReal = informes.indexOf(inf);
+
+        const li = document.createElement("li");
+        li.style.marginBottom = "10px";
+
+        li.innerHTML = `
+            <strong>${inf.domingo} - ${inf.clase}</strong> (Maestr@: ${inf.maestro})<br>
+            Asistencia: ${inf.asistencia}, Ofrendas: ${inf.ofrendas}, Visitas: ${inf.visitas}
+            <br>
+            <button onclick="editarInforme(${indexReal})">Editar</button>
+            <button onclick="eliminarInforme(${indexReal})">Eliminar</button>
+        `;
+
+        listaInformes.appendChild(li);
+    });
+}
+
+function existeRegistroPorFecha(fecha) {
+    return informes.findIndex(i => i.domingo === fecha);
+}
+
 
 // Mostrar informes al cargar
 mostrarInformes();

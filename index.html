@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <header class="encabezado">
+        <h1>Iglesia Bautista Villa Esperanza</h1>
+        <h2>Educación Cristiana</h2>
+    </header>
+
     <div class="card">
         <h2>Informe de Clase</h2>
         <form id="formInforme">
@@ -36,6 +41,33 @@
             </label>
             <button type="submit">Registrar</button>
         </form>
+        <div class="filtro-mes">
+            <label>Mes:
+                <select id="mesFiltro">
+                    <option value="">-- Todos --</option>
+                    <option value="0">Enero</option>
+                    <option value="1">Febrero</option>
+                    <option value="2">Marzo</option>
+                    <option value="3">Abril</option>
+                    <option value="4">Mayo</option>
+                    <option value="5">Junio</option>
+                    <option value="6">Julio</option>
+                    <option value="7">Agosto</option>
+                    <option value="8">Septiembre</option>
+                    <option value="9">Octubre</option>
+                    <option value="10">Noviembre</option>
+                    <option value="11">Diciembre</option>
+                </select>
+            </label>
+
+            <label>Año:
+                <input type="number" id="anioFiltro" placeholder="2026">
+            </label>
+
+            <button onclick="filtrarPorMes()">Filtrar y aplicar</button>
+            <button onclick="mostrarInformes()">Ver todos</button>
+        </div>
+
         <div class="lista-informes">
             <h3>Informes Registrados</h3>
             <ul id="listaInformes"></ul>
@@ -50,7 +82,7 @@
 
     <div class="reportes">
         <h3>Reportes</h3>
-        <label>Fecha del reporte:
+        <label>Fecha del reporte diario:
             <input type="date" id="fechaReporte">
         </label>
         <div class="botones-reporte">
