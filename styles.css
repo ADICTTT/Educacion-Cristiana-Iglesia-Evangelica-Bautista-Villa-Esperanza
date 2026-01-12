@@ -8,28 +8,17 @@ body {
     padding: 20px;
     color: #2c3e50;
 
-    background-image: url("fondo.webp"); /* imagen optimizada en WebP */
+    background-image: url("fondo.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: scroll; /* sin fixed para mejor rendimiento */
+    background-attachment: fixed;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    overflow-y: auto; /* permite scroll vertical si el contenido es alto */
-    -webkit-overflow-scrolling: touch; /* mejor scroll en iOS */
+    background-attachment: scroll;
 }
-
-@media (max-width: 600px) {
-    body {
-        padding: 12px;
-        background-image: url("fondo-small.webp"); /* versión móvil optimizada */
-        background-attachment: scroll;
-    }
-}
-
 
 .encabezado {
     width: 100%;
@@ -285,13 +274,5 @@ select:focus {
 
     pre {
         font-size: 14px;
-    }
-}
-
-@media (max-width: 600px) {
-    .card, .resultado, .reportes {
-        width: 100%;
-        max-width: 100%;
-        margin: 15px 0;
     }
 }
